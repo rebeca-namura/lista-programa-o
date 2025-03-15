@@ -217,7 +217,8 @@ Explique como funciona a herança nesse contexto e como você implementaria a mo
 
 
 
-`class Produto {
+```javascript
+class Produto {
     constructor(nome, preco) {
         this.nome = nome;
         this.preco = preco;
@@ -233,7 +234,7 @@ class Livro extends Produto {
     calcularDesconto() {
         return this.preco - this.preco * 0.2;
     }
-}`
+}```
 
 
 A classe Livro herda os atributos e métodos de Produto, podendo , também, adicionar seus próprios métodos e atributos. Além disso, é possivel sobrepor o método da classe mãe na classe filha, como feito no exemplo, no qual o desconto aplicado é de 20% e não 10%.
