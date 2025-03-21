@@ -192,7 +192,7 @@ Dispositivo 3 ligado. Energia restante: 400
 
 Dispositivo 4 não pode ser ligado. Energia insuficiente.
 
-D)
+**D**)
 Dispositivo 1 ligado. Energia restante: 900
 
 Dispositivo 2 ligado. Energia restante: 300
@@ -237,12 +237,37 @@ ______
 **7)** Uma loja online deseja implementar um sistema de classificação de pedidos com base no valor total da compra. O sistema deve determinar a categoria de um pedido com as seguintes regras:
 
 ```
-
 Pedidos abaixo de R$50,00 → "Frete não disponível!"
 
 Pedidos entre R$50,00 e R$199,99 (inclusive) → "Frete com custo adicional!"
 
 Pedidos de R$200,00 ou mais → "Frete grátis!"
+
+Resposta em pseudocódigo:
+
+FUNÇÃO CalculoFrete(valorPedido):  
+    SE valorPedido < 50 Então  
+        ESCREVER "Frete não disponível!"  
+    SENÃO SE valorPedido >= 50 E valorPedido <= 199.99 Então  
+        ESCREVER "Frete com custo adicional!"  
+    SENÃO SE valorPedido >= 200 Então  
+        ESCREVER "Frete grátis!"  
+FIM FUNÇÃO 
+
+Resposta em código:
+
+
+calculoFrete (valorPedido) {
+if (valorPedido < 50) { 
+    console.log("Frete não disponível!");
+}
+else if (50 <= valorPedido && valorPedido <= 199.99) {
+    console.log('Frete com custo adicional!');
+}
+else if (valorPedido >= 200) {
+    console.log('Frete grátis!');
+}
+}
 ```
 Implemente um pseudocódigo que receba o valor total da compra e exiba a classificação correta do frete para o cliente.
 ______
@@ -259,9 +284,102 @@ Método Construtor(modelo, ano):
 
 Define os valores dos atributos modelo e ano com os valores passados como parâmetro.
 Método CalcularConsumo():
-```
+
 Implementação genérica para cálculo de consumo, a ser sobrescrita pelas subclasses.
 Agora, implemente as classes Carro e Moto, garantindo que ambas herdem de Veiculo e possuam métodos específicos para calcular o consumo de combustível com base na quilometragem e eficiência do veículo.
+```
+```
+Resposta em pseudocódigo:
+CLASSE Veiculo
+    ATRIBUTOS
+        modelo
+        ano
+        quilometragem
+        gasolina
+
+    MÉTODO Construtor(modelo, ano, quilometragem, gasolina)
+        modelo ← modelo
+        ano ← ano
+        quilometragem ← quilometragem
+        gasolina ← gasolina
+    FIM MÉTODO
+
+    MÉTODO CalcularConsumo()
+        consumo ← quilometragem / gasolina
+        ESCREVER consumo
+    FIM MÉTODO
+FIM CLASSE
+
+CLASSE Moto HERDA Veiculo
+    ATRIBUTOS
+        eficiencia
+
+    MÉTODO Construtor(modelo, ano, quilometragem, gasolina, eficienciaMoto)
+        CHAMAR Super(modelo, ano, quilometragem, gasolina)
+        eficiencia ← eficienciaMoto
+    FIM MÉTODO
+
+    MÉTODO CalcularConsumo()
+        consumo ← (quilometragem / gasolina) * eficiencia
+        ESCREVER consumo
+    FIM MÉTODO
+FIM CLASSE
+
+CLASSE Carro HERDA Veiculo
+    ATRIBUTOS
+        eficiencia
+
+    MÉTODO Construtor(modelo, ano, quilometragem, gasolina, eficienciaCarro)
+        CHAMAR Super(modelo, ano, quilometragem, gasolina)
+        eficiencia ← eficienciaCarro
+    FIM MÉTODO
+
+    MÉTODO CalcularConsumo()
+        consumo ← (quilometragem / gasolina) * eficiencia
+        ESCREVER consumo
+    FIM MÉTODO
+FIM CLASSE
+
+Resposta em código:
+class Veiculo {
+    constructor (modelo, ano, quilometragem, gasolina) {
+        this.modelo = modelo;
+        this.ano = ano;
+        this.quilometragem = quilometragem;
+        this.gasolina = gasolina
+    }
+    CalcularConsumo() {
+        consumo = this.quilometragem / this.gasolina;
+        console.log (consumo);
+    }
+}
+
+class Moto extends Veiculo  {
+    constructor (modelo, ano, quilometragem, gasolina, eficienciaMoto) {
+        super (modelo, ano, quilometragem, gasolina);
+        this.eficiencia = eficienciaMoto;
+    }
+
+    CalcularConsumo() {
+        consumo = (this.quilometragem / this.gasolina) * this.eficiencia;
+        console.log (consumo);
+    }
+
+}
+
+class Carro extends Veiculo  {
+    constructor (modelo, ano, quilometragem, gasolina, eficienciaCarro) {
+        super (modelo, ano, quilometragem, gasolina);
+        this.eficiencia = eficienciaCarro;
+    }
+
+    CalcularConsumo() {
+        consumo = (this.quilometragem / this.gasolina) * this.eficiencia;
+        console.log (consumo);
+    }
+
+}
+```
 ______
 
 **9)** Você é um cientista da NASA e está ajudando no desenvolvimento de um sistema de pouso para sondas espaciais em Marte. Seu objetivo é calcular o tempo necessário para que a sonda reduza sua velocidade até um nível seguro para pouso, considerando uma velocidade inicial de entrada na atmosfera marciana e uma taxa de desaceleração constante causada pelo atrito atmosférico e retrofoguetes.
@@ -270,11 +388,67 @@ Entretanto, a sonda não pode ultrapassar um tempo máximo de descida para evita
 
 Implemente a lógica dessa simulação em pseudocódigo, considerando a seguinte equação para atualização da velocidade:
 
-Considere a fórumla de atualização velocidade:
+Considere a fórmula de atualização da velocidade:
 ```
     velocidade = velocidadeInicial - desaceleracao * tempo
 ```
 Seu programa deve determinar quanto tempo será necessário para que a sonda atinja uma velocidade segura de pouso, sem ultrapassar os limites estabelecidos.
+
+```
+Resposta em pseudocódigo:
+
+INICIO
+    
+    DECLARAR velocidadeInicial, velocidadeSegura, desaceleracao, tempoMaximo, tempo ← 0
+    LER velocidadeInicial
+    LER velocidadeSegura
+    LER desaceleracao
+    LER tempoMaximo
+
+    SE velocidadeInicial <= velocidadeSegura ENTAO
+        ESCREVER "A sonda já está em velocidade segura para pouso."
+        SAIR
+
+    SE desaceleracao <= 0 ENTAO
+        ESCREVER "Erro: A desaceleração deve ser positiva."
+        SAIR
+
+    tempo ← (velocidadeInicial - velocidadeSegura) / desaceleracao
+
+    SE tempo > tempoMaximo ENTAO
+        ESCREVER "Aviso: Tempo máximo de descida excedido! Ajuste necessário."
+    SENAO
+        ESCREVER "Tempo necessário para pouso seguro:", tempo, "segundos."
+    
+FIM
+
+Resposta em código:
+
+// valor de exemplo
+let velocidadeInicial = 500;  
+       
+
+function calcularTempoPouso(velocidadeInicial, velocidadeSegura, desaceleracao, tempoMaximo) {
+    if (velocidadeInicial <= velocidadeSegura) {
+        console.log("A sonda já está em velocidade segura para pouso.");
+    }
+
+    if (desaceleracao <= 0) {
+        console.log("Erro: A desaceleração deve ser positiva.");
+    }
+
+    let tempo = (velocidadeInicial - velocidadeSegura) / desaceleracao;
+
+    if (tempo > tempoMaximo) {
+        console.log("Aviso: Tempo máximo de descida excedido! Ajuste necessário.");
+    } else {
+        console.log(`Tempo necessário para pouso seguro: ${tempo.toFixed(2)} segundos.`);
+    }
+
+}
+
+```
+
 ______
 
 **10)** Em um sistema de análise financeira, as operações de investimento de uma empresa podem ser representadas por matrizes, onde cada linha representa um tipo de investimento e cada coluna representa um período de tempo.
@@ -307,3 +481,30 @@ Escrever("Total de investimentos acumulados:")
 ImprimirMatriz(totalInvestimentos)  
 ```
 Agora, implemente a função MultiplicarMatrizesInvestimento(matrizA, matrizB), que multiplica as duas matrizes, simulando o efeito de diferentes fatores de crescimento e impacto financeiro nos investimentos ao longo do tempo.
+
+```
+Resposta:
+
+FUNÇÃO MultiplicarMatrizesInvestimento(matrizA, matrizB):  
+    # Verifica se o número de colunas da matrizA é igual ao número de linhas da matrizB  
+    SE tamanho(matrizA[0]) ≠ tamanho(matrizB) então:  
+        Retornar "As matrizes não podem ser multiplicadas. Dimensões incompatíveis."  
+    SENÃO:  
+        linhasA <- tamanho(matrizA)  
+        colunasA <- tamanho(matrizA[0])  
+        colunasB <- tamanho(matrizB[0])  
+        matrizResultado <- novaMatriz(linhasA, colunasB)  
+
+        # Loop para multiplicar as matrizes  
+        PARA i de 0 até linhasA-1 FAÇA:  
+            PARA j de 0 até colunasB-1 FAÇA:  
+                matrizResultado[i][j] <- 0  
+                PARA k de 0 até colunasA-1 FAÇA:  
+                    matrizResultado[i][j] <- matrizResultado[i][j] + (matrizA[i][k] * matrizB[k][j])  
+
+        RETORNAR matrizResultado  
+
+# Exemplo de uso da função  
+investimentos <- [[1000, 2000], [1500, 2500]]  
+fatoresCrescimento <- [[1.1, 0.9], [1.2, 1.3]]  
+```
